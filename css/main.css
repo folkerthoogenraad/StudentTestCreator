@@ -1,0 +1,27 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+    color:#444;
+}
+
+body{
+    padding:0;
+    margin:0;
+    background: white;
+    background: linear-gradient(135deg, #fff 0%,#fff 100%);
+}
+
+.body{
+    padding: 0px;
+    width: 95%;
+    max-width:1280px;
+    background:white;
+    margin:3% auto;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.32);
+}
+
+.content{
+    padding:20px;
+    padding-left:5%;
+}

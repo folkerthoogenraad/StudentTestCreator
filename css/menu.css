@@ -1,0 +1,63 @@
+
+.menu_button{
+    position: fixed;
+    width:60px;
+    height:60px;
+    padding:10px;
+    background:rgba(0,0,0,0.00);
+    
+    right:8px;
+    top:8px;
+
+    transition: background-color 0.3s ease-out;
+    border-radius: 30px;
+}
+.menu_button:hover{
+    background:rgba(0,0,0,0.2);
+}
+
+.menu_button div{
+    width:80%;
+
+    width:15%;
+    border-radius: 100%;
+
+    height: 15%;
+    margin-top: 12.5%;
+    margin-bottom: 12.5%;
+    margin-left:auto;
+    margin-right:auto;
+    background:#444;
+}
+
+.menu{
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.32);
+    background:white;
+    position: fixed;
+    width:260px;
+    right:8px;
+    top:78px;
+    padding:8px;
+    border-radius: 4px;
+    
+    opacity: 0;
+}
+
+.menu .menu_divider{
+    width:90%;
+    margin:10px auto;
+    height:1px;
+    background:#ccc;
+}
+
+.menu .menu_item{
+    padding:10px;
+    text-align: center;
+    transition: background-color 0.3s ease-out;
+    user-select: none;
+    border-radius: 4px;
+}
+
+.menu .menu_item:hover{
+    background:#ddd;
+}

@@ -1,0 +1,28 @@
+.editable{
+    text-overflow: clip;
+}
+.editable.inline{
+    display:inline-block;
+}
+
+.editable:focus{
+    outline:none;
+}
+.editable::after {
+    height: 2px;
+    display: block;
+    width: 100%;
+    background: #657a9e;
+    content: '';
+    
+    transform: scale(0, 1) translate(50%);
+    transition: transform 0.3s ease;
+}
+.editable:focus::after {
+    height: 2px;
+    display: block;
+    width: 100%;
+    background: #657a9e;
+    transform: scale(1, 1) translate(0%);
+    content: '';
+}

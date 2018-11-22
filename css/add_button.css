@@ -1,0 +1,36 @@
+.add_button{
+    position: fixed;
+    width:60px;
+    height:60px;
+    background:#34495e;
+    padding:0px;
+    
+    right:10%;
+    bottom:10%;
+
+    transition: background-color 0.3s ease-out;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 30px;
+}
+.add_button:hover{
+    background:#657a9e;
+}
+
+.add_button div{
+    width:50%;
+    height:3px;
+
+    background:#ecf0f1;
+
+    transform-origin: 50% 50%;
+
+    position: absolute;
+
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+.add_button div:nth-child(1){
+    transform: translate(-50%,-50%) rotate(90deg);
+}
