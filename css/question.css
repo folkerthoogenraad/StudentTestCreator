@@ -42,14 +42,13 @@
 .subject_head{
     width:100%;
     background: #ffffff;
-    padding:0px;
     font-weight: bold;
     color:rgb(63, 63, 63);
     overflow: hidden;
     border: 1px solid #ddd;
 }
 .subject_head *{
-    padding:8px;
+    padding:16px 8px;
 }
 .subject_content{
     width:95%;
