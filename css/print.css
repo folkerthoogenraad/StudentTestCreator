@@ -1,0 +1,28 @@
+* {
+    font-family: 'Old Standard TT', serif;
+    box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+}
+
+p{
+    margin:8px 0px;
+}
+.question{
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+.intro{
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+.info{
+    margin-top: 32px;
+    margin-bottom: 8px;
+}
+
+@page {
+    margin: 2cm;
+}

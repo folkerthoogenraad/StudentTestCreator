@@ -55,7 +55,10 @@ window.addEventListener('load', ()=>{
     var addButton = document.getElementById("add_button");
     if(addButton != null){
         addButton.addEventListener('click', ()=>{
-            var m = openModal("Not currently implemented. Please use the tripple dot menu instead.", {closeable: true});
+            var w = window.open();
+            loadFile("print.html", function(err, element){
+                w.document.write(element);
+            });
         });
     }
 
