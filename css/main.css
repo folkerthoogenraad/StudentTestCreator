@@ -7,16 +7,29 @@
 body{
     padding:0;
     margin:0;
-    background: white;
-    background: linear-gradient(135deg, #fff 0%,#fff 100%);
+    background:#eee;
+}
+
+.banner{
+    height:70px;
+    font-size:20px;
+    padding:20px;
+    text-align: center;
+    background:white;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.32);
+    position:fixed;
+    width:100%;
+    
+    left:0;
+    top:0;
 }
 
 .body{
     padding: 0px;
     width: 95%;
     max-width:1280px;
+    margin:80px auto;
     background:white;
-    margin:3% auto;
     border-radius: 10px;
     box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.32);
 }
@@ -24,4 +37,49 @@ body{
 .content{
     padding:20px;
     padding-left:5%;
+}
+
+.button{
+    padding:5px;
+    background:#ddd;
+    display:inline-block;
+    border-radius:4px;
+    margin:4px;
+    text-align: center;
+    padding-left:20px;
+    padding-right:20px;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
+.button:hover{
+    background:gray;
+}
+
+.button.primary{
+    background:rgb(85, 121, 161);
+    color:white;
+}
+.button.primary:hover{
+    background:rgb(64, 90, 121);
+}
+
+.button.secondary{
+    background:white;
+    color:rgb(85, 121, 161);
+    border:1px solid rgb(85, 121, 161);
+}
+.button.secondary:hover{
+    background:#ddd;
+}
+
+
+@media only screen and (max-width: 1040px) {
+    .body{
+        width:100%;
+        box-shadow: none;
+        border-radius: 0px;
+    }
+    .content{
+        padding:5px;
+    }
 }

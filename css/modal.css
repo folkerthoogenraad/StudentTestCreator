@@ -27,6 +27,23 @@
     left: 0;
     right: 0;
 }
+.modal_title{
+    border-bottom:1px solid #ddd;
+    padding:20px;
+    font-size: 20px;
+}
+.modal_content{
+    width:100%;
+    padding:20px;
+}
+.modal_footer{
+    width:100%;
+    padding:20px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    border-top:1px solid #ddd;
+}
 
 @keyframes modalFadeIn {
     from {transform: translateY(-120%);}

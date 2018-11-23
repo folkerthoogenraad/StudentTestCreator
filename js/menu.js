@@ -19,12 +19,13 @@ function setMenu(menu){
     var d = document.getElementById(elementId);
     
     menuOpen = menu;
-    d.style.transition = "opacity 0.2s linear";
+    d.style.transformOrigin = "100% 0%";
+    d.style.transition = "transform 0.3s ease";
 
     if(menuOpen){
-        d.style.opacity = "1";
+        d.style.transform = "scale(1, 1)";
     }else{
-        d.style.opacity = "0";
+        d.style.transform = "scale(0, 0)";
     }
 
 }
