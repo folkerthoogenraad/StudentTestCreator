@@ -13,6 +13,12 @@
 .question + .question{
     border-top:1px solid #ccc;
 }
+.question * + *{
+    border-left:1px solid #ccc;
+}
+.question *{
+    height:100%;
+}
 
 .question_index{
     padding:10px;
@@ -20,8 +26,6 @@
     overflow:hidden;
 }
 .question_body{
-    border-right:1px solid #ccc;
-    border-left:1px solid #ccc;
     padding:10px;
     height:100%;
     overflow:hidden;

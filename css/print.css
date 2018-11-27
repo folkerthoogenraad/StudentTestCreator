@@ -26,3 +26,7 @@ p{
 @page {
     margin: 2cm;
 }
+
+.center{
+    text-align: center;
+}

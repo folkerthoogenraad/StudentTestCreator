@@ -1,16 +1,19 @@
 .col1{
     width:8.3333333333333333333333333333333%;
     display:block;
+    min-height: 12px;
     float:left;
 }
 .col2{
     width:16.666666666666666666666666666667%;
     display:block;
+    min-height: 12px;
     float:left;
 }
 .col3{
     width:25%;
     display:block;
+    min-height: 12px;
     float:left;
 }
 .col4{
@@ -46,11 +49,13 @@
 .col10{
     width:83.333333333333333333333333333333%;
     display:block;
+    min-height: 12px;
     float:left;
 }
 .col11{
     width:91.666666666666666666666666666667%;
     display:block;
+    min-height: 12px;
     float:left;
 }
 .col12{
