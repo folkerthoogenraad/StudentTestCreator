@@ -26,10 +26,42 @@ p{
 @page {
     margin: 2cm;
 }
+@media print {
+    .page_break {page-break-after: always;}
+}
 
 .center{
     text-align: center;
 }
 code{
     font-family: monospace;
+}
+
+.fullwidth{
+    width:100%;
+}
+table{
+    border-collapse: collapse;
+}
+
+th{
+    font-weight: bold;
+}
+tr:last-child{
+    font-weight: bold;
+}
+
+th + th, td + td{
+    border-left:1px solid #ddd;
+}
+tr + tr{
+    border-top:1px solid #ddd;
+}
+
+td, th{
+    padding:5px 10px;
+}
+
+.minor{
+    color:#ccc;
 }

@@ -1,23 +1,56 @@
 var v = {
     "title" : "SQL Toets",
     "info" : "Bij deze toets zijn geen hulpmiddelen toegestaan. Je hebt 50 minuten voor de toets. Motiveer je antwoorden. ",
+    "goals" : [
+        {
+            "id" : "g1",
+            "text" : "Leerling kan beschrijven wat een database is en wat tabellen zijn"
+        },
+        {
+            "id" : "g2",
+            "text" : "De leerling kan uitleggen wat SQL is"
+        },
+
+        {
+            "id" : "g3",
+            "text" : "De leerling kan eenvoudige queries maken met SELECT, FROM en WHERE"
+        },
+        {
+            "id" : "g4",
+            "text" : "Leerling kan queries maken met DISTINCT"
+        },
+        {
+            "id" : "g5",
+            "text" : "Leerling kan SQL queries maken met meerdere tabellen"
+        },
+        {
+            "id" : "g6",
+            "text" : "Leerling kan gebruik maken van functies in SQL queries"
+        },
+    ],
     "questions" : [
         {
             "type" : "question",
             "text" : "Beschrijf wat een tabel is in een database.",
             "answer" : "Een datatype of entiteit (met verschillende kolommen) in een database",
+            "goal" : "g1",
+            "level" : "knowledge",
             "points" : 1
         },
         {
             "type" : "question",
             "text" : "Beschrijf wat een record is in een database.",
             "answer" : "Een rij in een tabel (met informatie)",
+            "goal" : "g1",
+            "level" : "knowledge",
             "points" : 1
         },
         {
             "type" : "question",
             "text" : "Beschrijf wat SQL is",
             "answer" : "Een (database) vraagtaal",
+            "goal" : "g2",
+            "level" : "knowledge",
             "points" : 2
         },
 
@@ -34,12 +67,16 @@ var v = {
             "type" : "question",
             "text" : "Geef de voor- en achternamen van alle leerlingen die in Doetinchem wonen, gesorteerd op achternaam",
             "answer" : "<code>SELECT voornaam, naam FROM leerlingen WHERE woonplaats = \"Doetinchem\" ORDER BY achternaam</code>",
+            "goal" : "g3",
+            "level" : "application",
             "points" : 2
         },
         {
             "type" : "question",
             "text" : "Geef alle unieke woonplaatsen",
             "answer" : "<code>SELECT DISTINCT woonplaats FROM leerlingen</code>",
+            "goal" : "g4",
+            "level" : "application",
             "points" : 1
         },
 
@@ -47,12 +84,16 @@ var v = {
             "type" : "question",
             "text" : "Geef de leerlingnummers van alle leerlingen die geen herkansing hebben gemaakt voor de \"Atmosfeer\" toets",
             "answer" : "<code>SELECT leerlingnr FROM toetsen, cijfers WHERE toetsen.toetsnr = cijfers.toetsnr AND toetsnaam = \"Atmosfeer\" AND herkansing IS NULL</code>",
+            "goal" : "g5",
+            "level" : "application",
             "points" : 2
         },
         {
             "type" : "question",
             "text" : "Geef de voor- en achternaam van alle leerlingen die ooit een herkansing hebben gemaakt",
             "answer" : "<code>SELECT DISTINCT naam, achternaam FROM leerlingen, cijfers WHERE leerlingen.leerlingnr = cijfers.leerlingnr AND NOT herkansing IS NULL</code>",
+            "goal" : "g5",
+            "level" : "application",
             "points" : 2
         },
 
@@ -60,12 +101,16 @@ var v = {
             "type" : "question",
             "text" : "Geef het gemiddelde cijfer van alle toetsen (zonder herkansingen)",
             "answer" : "<code>SELECT AVG(cijfer) FROM cijfers</code>",
+            "goal" : "g6",
+            "level" : "application",
             "points" : 1
         },
         {
             "type" : "question",
             "text" : "Geef het laagste cijfer per toets (zonder herkansingen)",
             "answer" : "<code>SELECT MIN(cijfer), toetsnr FROM cijfers GROUP BY toetsnr</code>",
+            "goal" : "g6",
+            "level" : "application",
             "points" : 2
         }
     ]
@@ -74,19 +119,30 @@ var v = {
 function b(classes, content){
     return element("b", classes, content);
 }
-
 function p(classes, content){
     return element("p", classes, content);
 }
-
 function h1(classes, content){
     return element("h1", classes, content);
 }
-
 function div(classes, content){
     return element("div", classes, content);
 }
-
+function table(classes, content){
+    return element("table", classes, content);
+}
+function tr(classes, content){
+    return element("tr", classes, content);
+}
+function td(classes, content){
+    return element("td", classes, content);
+}
+function th(classes, content){
+    return element("th", classes, content);
+}
+function span(classes, content){
+    return element("span", classes, content);
+}
 function element(el, classes, content){
     return "<" + el + " class=\"" + classes + "\"" + ">" + content + "</" + el + ">";
 }
@@ -117,18 +173,93 @@ function generateInfo(info){
     );
 }
 
-function getTotalPoints(test){
-    var sum = 0;
+function generateTestMatrixRowHead(test){
+    return tr("",
+        th("", "Doel") + 
+        th("", "Kennis") + 
+        th("", "Toepassing") + 
+        th("", "Inzicht") + 
+        th("", "Hoeveelheid") + 
+        th("", "Weging")
+    );
+}
+function generateTestMatrixRowRaw(text, knowledge, application, insight, count, weight){
+    return tr("",
+        td("", text) + 
+        td("", knowledge) + 
+        td("", application) + 
+        td("", insight) + 
+        td("", count) + 
+        td("", Math.round(weight * 100) + "%")
+    );
+}
+
+function generateTestMatrixRow(test, goal){
+    var kSum = 0;
+    var kCount = 0;
+    var aSum = 0;
+    var aCount = 0;
+    var iSum = 0;
+    var iCount = 0;
+
+    var total = getTotalPoints(test);
 
     test.questions.forEach(element => {
-        if(element.type === "question"){
+        if(element.goal == goal.id){
+            if(element.level === "insight"){
+                iSum += element.points;
+                iCount++;
+            }
+            else if(element.level === "application"){
+                aSum += element.points;
+                aCount++;
+            }
+            else{
+                kSum += element.points;
+                kCount++;
+            }
+        }
+    });
+
+    return generateTestMatrixRowRaw(
+        goal.text, 
+        kSum  + span("minor", "(" + kCount + ")"),
+        aSum  + span("minor", "(" + aCount + ")"),
+        iSum  + span("minor", "(" + iCount + ")"), 
+        kCount + aCount + iCount, 
+        (kSum + aSum + iSum) / total);
+}
+
+// Helper functions
+function getTotalPoints(test, func){
+    var sum = 0;
+    if(func == undefined)
+        func = el => true;
+
+    test.questions.forEach(element => {
+        if(element.type === "question" && func(element)){
             sum += element.points;
         }
     });
 
     return sum;
 }
+function getQuestionCount(test, func){
+    var sum = 0;
 
+    if(func == undefined)
+        func = el => true;
+
+    test.questions.forEach(element => {
+        if(element.type === "question" && func(element)){
+            sum ++;
+        }
+    });
+
+    return sum;
+}
+
+// Full generation
 function generateTest(test){
     var str = "";
 
@@ -153,10 +284,10 @@ function generateTest(test){
     return str;
 }
 
-function generateAnswers(test){
+function generateAnswerSheet(test){
     var str = "";
 
-    str += h1("", test.title);
+    str += h1("", test.title + " - Antwoorden");
     str += div("intro",
         p("", "Elke fout is een punt minder van de vraag. Er worden geen negatieve punten toegekend.") + 
         p("", "Totale punten: " + getTotalPoints(test))
@@ -174,7 +305,99 @@ function generateAnswers(test){
     return str;
 }
 
+function generateTestMatrix(test){
+
+    var str = "";
+
+    var totalPoints = getTotalPoints(test);
+    var pointsForPass = (5.5 - 1) * totalPoints / 9;
+    var markForPass = (Math.ceil(pointsForPass) / totalPoints) * 9 + 1
+
+    str += h1("", test.title + " - Toetsmatrijs");
+    str += div("intro",
+        p("", "Cijfer = (punten / " + getTotalPoints(test) + ") * 9 + 1" + 
+            span("minor", " (" + 
+                (Math.ceil(pointsForPass) + " punten voor een voldoende (" + (Math.round(markForPass * 10) / 10) + ")")
+                + ")"
+            )
+        )
+    );
+
+    {
+        var tableString = "";
+
+        test.goals.forEach(element => {
+            tableString += generateTestMatrixRow(test, element)
+        });
+        str += div("info", table("fullwidth", 
+            generateTestMatrixRowHead() + 
+            tableString + 
+            generateTestMatrixRowRaw("Totaal", 
+            getTotalPoints(test, el => el.level === "knowledge"),
+            getTotalPoints(test, el => el.level === "application"), 
+            getTotalPoints(test, el => el.level === "insight"), 
+            getQuestionCount(test), 
+            1)
+        ));
+    }
+
+    str += div("info", "In de onderstaande tabel is de weging per toetsniveau te zien.");
+
+    {
+        var tableString = "";
+
+        tableString += tr("", 
+            th("", "") + 
+            th("", "Punten") +
+            th("", "Weging")
+        );
+
+        var kSum = getTotalPoints(test, el => el.level === "knowledge");
+        var aSum = getTotalPoints(test, el => el.level === "application"); 
+        var iSum = getTotalPoints(test, el => el.level === "insight");
+        var sum = getTotalPoints(test);
+
+        tableString += tr("", 
+            td("", "Kennis") + 
+            td("", kSum) + 
+            td("", Math.round(kSum / sum * 100) + "%")
+        );
+
+        tableString += tr("", 
+            td("", "Toepassing") +
+            td("", aSum) + 
+            td("", Math.round(aSum / sum * 100) + "%")
+        );
+
+        tableString += tr("", 
+            td("", "Inzicht") + 
+            td("", iSum) + 
+            td("", Math.round(iSum / sum * 100) + "%")
+        );
+
+        tableString += tr("", 
+            td("", "Total") + 
+            td("", sum) + 
+            td("", "100%")
+        );
+
+        str += div("info", table("", tableString));
+    }
+
+    return str;
+}
+
+
 window.onload = function(){
+    var fullHTML = "";
+    fullHTML +=  generateTest(v);
+    fullHTML += div("page_break", "");
+    fullHTML +=  generateAnswerSheet(v);
+    fullHTML += div("page_break", "");
+    fullHTML +=  generateTestMatrix(v);
+
     //document.body.innerHTML = generateTest(v);
-    document.body.innerHTML = generateAnswers(v);
+    //document.body.innerHTML = generateAnswerSheet(v);
+    //document.body.innerHTML = generateTestMatrix(v);
+    document.body.innerHTML = fullHTML;
 }
