@@ -1,6 +1,7 @@
 var v = {
     "title" : "SQL Toets",
-    "info" : "Bij deze toets zijn geen hulpmiddelen toegestaan. Je hebt 50 minuten voor de toets. Motiveer je antwoorden. ",
+    "info" : "Toets 'SQL'. Enigma hoofdstuk 7, 5 Havo. Bij deze toets zijn geen hulpmiddelen toegestaan. Je hebt 50 minuten voor de toets. Motiveer je antwoorden. ",
+    "answerInfo" : "Kies bij het nakijken een van de antwoorden. Komt er geen antwoord overeen is dit nul punten. ",
     "goals" : [
         {
             "id" : "g1",
@@ -32,7 +33,11 @@ var v = {
         {
             "type" : "question",
             "text" : "Beschrijf wat een tabel is in een database.",
-            "answer" : "Een datatype of entiteit (met verschillende kolommen) in een database",
+            "answer" : [
+                "(1) Gegevens in kolommen",
+                "(1) Een datatype",
+                "(1) Een entiteit"
+            ],
             "goal" : "g1",
             "level" : "knowledge",
             "points" : 1
@@ -40,7 +45,10 @@ var v = {
         {
             "type" : "question",
             "text" : "Beschrijf wat een record is in een database.",
-            "answer" : "Een rij in een tabel (met informatie)",
+            "answer" : [
+                "(1) Een rij in een tabel",
+                "(1) Informatie in een tabel"
+            ],
             "goal" : "g1",
             "level" : "knowledge",
             "points" : 1
@@ -49,6 +57,11 @@ var v = {
             "type" : "question",
             "text" : "Beschrijf wat SQL is",
             "answer" : "Een (database) vraagtaal",
+            "answer" : [
+                "(2) Database vraagtaal",
+                "(1) Structured Query Language",
+                "(1) Vraagtaal"
+            ],
             "goal" : "g2",
             "level" : "knowledge",
             "points" : 2
@@ -66,7 +79,10 @@ var v = {
         {
             "type" : "question",
             "text" : "Geef de voor- en achternamen van alle leerlingen die in Doetinchem wonen, gesorteerd op achternaam",
-            "answer" : "<code>SELECT voornaam, naam FROM leerlingen WHERE woonplaats = \"Doetinchem\" ORDER BY achternaam</code>",
+            "answer" : [
+                "(2) <code>SELECT voornaam, naam FROM leerlingen WHERE woonplaats = \"Doetinchem\" ORDER BY achternaam</code>",
+                "(1) <code>SELECT voornaam, naam FROM leerlingen WHERE woonplaats = \"Doetinchem\"",
+            ],
             "goal" : "g3",
             "level" : "application",
             "points" : 2
@@ -74,7 +90,9 @@ var v = {
         {
             "type" : "question",
             "text" : "Geef alle unieke woonplaatsen",
-            "answer" : "<code>SELECT DISTINCT woonplaats FROM leerlingen</code>",
+            "answer" : [
+                "(1)<code>SELECT DISTINCT woonplaats FROM leerlingen</code>",
+            ],
             "goal" : "g4",
             "level" : "application",
             "points" : 1
@@ -83,7 +101,12 @@ var v = {
         {
             "type" : "question",
             "text" : "Geef de leerlingnummers van alle leerlingen die geen herkansing hebben gemaakt voor de \"Atmosfeer\" toets",
-            "answer" : "<code>SELECT leerlingnr FROM toetsen, cijfers WHERE toetsen.toetsnr = cijfers.toetsnr AND toetsnaam = \"Atmosfeer\" AND herkansing IS NULL</code>",
+            
+            "answer" : [
+                "(2) <code>SELECT leerlingnr FROM toetsen, cijfers WHERE toetsen.toetsnr = cijfers.toetsnr AND toetsnaam = \"Atmosfeer\" AND herkansing IS NULL</code>",
+                "(1) <code>SELECT leerlingnr FROM toetsen, cijfers WHERE toetsnaam = \"Atmosfeer\" AND herkansing IS NULL</code>",
+                "(1) <code>SELECT leerlingnr FROM toetsen, cijfers WHERE toetsen.toetsnr = cijfers.toetsnr AND toetsnaam = \"Atmosfeer\"</code>",
+            ],
             "goal" : "g5",
             "level" : "application",
             "points" : 2
@@ -91,7 +114,10 @@ var v = {
         {
             "type" : "question",
             "text" : "Geef de voor- en achternaam van alle leerlingen die ooit een herkansing hebben gemaakt",
-            "answer" : "<code>SELECT DISTINCT naam, achternaam FROM leerlingen, cijfers WHERE leerlingen.leerlingnr = cijfers.leerlingnr AND NOT herkansing IS NULL</code>",
+            "answer" : [
+                "(2) <code>SELECT DISTINCT naam, achternaam FROM leerlingen, cijfers WHERE leerlingen.leerlingnr = cijfers.leerlingnr AND NOT herkansing IS NULL</code>",
+                "(1) <code>SELECT naam, achternaam FROM leerlingen, cijfers WHERE leerlingen.leerlingnr = cijfers.leerlingnr AND NOT herkansing IS NULL</code>",
+            ],
             "goal" : "g5",
             "level" : "application",
             "points" : 2
@@ -100,7 +126,9 @@ var v = {
         {
             "type" : "question",
             "text" : "Geef het gemiddelde cijfer van alle toetsen (zonder herkansingen)",
-            "answer" : "<code>SELECT AVG(cijfer) FROM cijfers</code>",
+            "answer" : [
+                "(1) <code>SELECT AVG(cijfer) FROM cijfers</code>",
+            ],
             "goal" : "g6",
             "level" : "application",
             "points" : 1
@@ -108,7 +136,11 @@ var v = {
         {
             "type" : "question",
             "text" : "Geef het laagste cijfer per toets (zonder herkansingen)",
-            "answer" : "<code>SELECT MIN(cijfer), toetsnr FROM cijfers GROUP BY toetsnr</code>",
+            "answer" : [
+                "(2) <code>SELECT MIN(cijfer), toetsnr FROM cijfers GROUP BY toetsnr</code>",
+                "(2) <code>SELECT MIN(cijfer) FROM cijfers GROUP BY toetsnr</code>",
+                "(1) <code>SELECT MIN(cijfer) FROM cijfers</code>",
+            ],
             "goal" : "g6",
             "level" : "application",
             "points" : 2
@@ -158,11 +190,26 @@ function generateQuestion(question, index){
 }
 
 function generateQuestionAnswer(question, index){
+
+    var ans = question.answer;
+
+    if(Array.isArray(question.answer)){
+        ans = "<br />";
+        for(var i = 0; i < question.answer.length; i++){
+            ans += question.answer[i];
+            if(i != question.answer.length - 1){
+                ans += ", <br />";
+            }else{
+                ans += ".";
+            }
+        }
+    }
+
     return div("question",
         div("col1", question.points + "pnt") + 
         div("col11", 
             b("", "Vraag " + index + ". ") + 
-            question.answer
+            ans
         )
     );
 }
@@ -289,7 +336,7 @@ function generateAnswerSheet(test){
 
     str += h1("", test.title + " - Antwoorden");
     str += div("intro",
-        p("", "Elke fout is een punt minder van de vraag. Er worden geen negatieve punten toegekend.") + 
+        p("", test.answerInfo) + 
         p("", "Totale punten: " + getTotalPoints(test))
     );
 
