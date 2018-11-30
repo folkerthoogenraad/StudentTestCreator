@@ -72,6 +72,17 @@ body{
     background:#ddd;
 }
 
+.table{
+    width:100%;
+}
+
+input[type=text] {
+    padding:10px;
+}
+input[type=number] {
+    text-align: right;
+}
+
 
 @media only screen and (max-width: 1040px) {
     .body{
