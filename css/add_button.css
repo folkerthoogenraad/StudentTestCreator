@@ -1,7 +1,7 @@
 .add_button{
     position: fixed;
-    width:60px;
-    height:60px;
+    width:56px;
+    height:56px;
     background:#34495e;
     padding:0px;
     
@@ -17,7 +17,7 @@
 }
 
 .add_button div{
-    width:50%;
+    width:30%;
     height:3px;
 
     background:#ecf0f1;

@@ -11,9 +11,9 @@ body{
 }
 
 .banner{
-    height:70px;
+    height:56px; /* was 70, decreased by 14*/
     font-size:20px;
-    padding:20px;
+    padding:14px;
     text-align: center;
     background:white;
     box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.32);
@@ -28,7 +28,7 @@ body{
     padding: 0px;
     width: 95%;
     max-width:1280px;
-    margin:80px auto;
+    margin:66px auto;
     background:white;
     border-radius: 10px;
     box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.32);
