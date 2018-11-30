@@ -157,10 +157,6 @@ window.addEventListener('load', function(){
             w.document.write(element);
             w.document.write(generateAll(crl.test));
             w.document.close();
-
-            setTimeout(() => {
-                w.print();
-            }, 0);
         });
     });
 
