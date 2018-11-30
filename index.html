@@ -7,7 +7,6 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Exo+2|Open+Sans" rel="stylesheet">
 
-        <script src="js/menu.js"></script>
         <script src="js/async.js"></script>
         <script src="js/editable.js"></script>
         <script src="js/modal.js"></script>
@@ -31,17 +30,19 @@
             <div></div>
             <div></div>
         </div>
-        <div id="menu" class="menu">
+        <div id="main_menu" class="menu">
             <div id="new_test" class="menu_item">New Test</div>
             <div id="new_subject" class="menu_item">New Subject</div>
-            <div id="new_question" class="menu_item">New Question</div>
             <div class="menu_divider"></div>
-            <div class="menu_item">Import</div>
-            <div class="menu_item">Export test</div>
-            <div class="menu_item">Export answers</div>
-            <div class="menu_item">Export matrix</div>
+            <div id="import" class="menu_item">Import</div>
+            <div id="export" class="menu_item">Export</div>
             <div class="menu_divider"></div>
             <div class="menu_item">Print</div>
+        </div>
+        
+        <div id="add_menu" class="menu">
+            <div id="new_info" class="menu_item">Add Info</div>
+            <div id="new_question" class="menu_item">Add Question</div>
         </div>
         <div id="add_button" class="add_button">
             <div></div>

@@ -1,7 +1,7 @@
 var v = {
     "title" : "SQL Toets",
     "info" : "Toets 'SQL'. Enigma hoofdstuk 7, 5 Havo. Bij deze toets zijn geen hulpmiddelen toegestaan. Je hebt 50 minuten voor de toets. Motiveer je antwoorden. ",
-    "answerInfo" : "Kies bij het nakijken een van de antwoorden. Komt er geen antwoord overeen is dit nul punten. ",
+    "answerInfo" : "Kies bij het nakijken een van de antwoorden. Komt er geen antwoord overeen is dit nul punten. Verkeerd hoofdlettergebruik bij SQL verliest een punt (per vraag)",
     "goals" : [
         {
             "id" : "g1",
@@ -29,7 +29,7 @@ var v = {
             "text" : "Leerling kan gebruik maken van functies in SQL queries"
         },
     ],
-    "questions" : [
+    "content" : [
         {
             "type" : "question",
             "text" : "Beschrijf wat een tabel is in een database.",
@@ -56,7 +56,6 @@ var v = {
         {
             "type" : "question",
             "text" : "Beschrijf wat SQL is",
-            "answer" : "Een (database) vraagtaal",
             "answer" : [
                 "(2) Database vraagtaal",
                 "(1) Structured Query Language",
@@ -81,7 +80,7 @@ var v = {
             "text" : "Geef de voor- en achternamen van alle leerlingen die in Doetinchem wonen, gesorteerd op achternaam",
             "answer" : [
                 "(2) <code>SELECT voornaam, naam FROM leerlingen WHERE woonplaats = \"Doetinchem\" ORDER BY achternaam</code>",
-                "(1) <code>SELECT voornaam, naam FROM leerlingen WHERE woonplaats = \"Doetinchem\"",
+                "(1) <code>SELECT voornaam, naam FROM leerlingen WHERE woonplaats = \"Doetinchem\"</code>",
             ],
             "goal" : "g3",
             "level" : "application",
@@ -147,6 +146,7 @@ var v = {
         }
     ]
 };
+v = {"title":"Title","info":"Test information for students at the top of the test. Use this place to tell about calculators and other stuff.","answerInfo":"Information about the answer sheet of the test. Use this to inform teachers about how to grade the test","goals":[],"content":[{"type":"question","text":"Je moeder aan de poeder","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This isn't content.","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"info","text":"Some information about the test is found here."},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"},{"type":"question","text":"This is actual content","answer":["Answer"],"goal":0,"points":1,"level":"knowledge"}]};
 
 function b(classes, content){
     return element("b", classes, content);
@@ -251,7 +251,7 @@ function generateTestMatrixRow(test, goal){
 
     var total = getTotalPoints(test);
 
-    test.questions.forEach(element => {
+    test.content.forEach(element => {
         if(element.goal == goal.id){
             if(element.level === "insight"){
                 iSum += element.points;
@@ -283,7 +283,7 @@ function getTotalPoints(test, func){
     if(func == undefined)
         func = el => true;
 
-    test.questions.forEach(element => {
+    test.content.forEach(element => {
         if(element.type === "question" && func(element)){
             sum += element.points;
         }
@@ -297,7 +297,7 @@ function getQuestionCount(test, func){
     if(func == undefined)
         func = el => true;
 
-    test.questions.forEach(element => {
+    test.content.forEach(element => {
         if(element.type === "question" && func(element)){
             sum ++;
         }
@@ -318,7 +318,7 @@ function generateTest(test){
 
     var index = 0;
 
-    test.questions.forEach(element => {
+    test.content.forEach(element => {
         if(element.type === "question"){
             index++;
             str += generateQuestion(element, index);
@@ -342,7 +342,7 @@ function generateAnswerSheet(test){
 
     var index = 0;
 
-    test.questions.forEach(element => {
+    test.content.forEach(element => {
         if(element.type === "question"){
             index++;
             str += generateQuestionAnswer(element, index);

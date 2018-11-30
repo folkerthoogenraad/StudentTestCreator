@@ -37,14 +37,24 @@
     position: fixed;
     width:260px;
     right:8px;
-    top:78px;
     padding:8px;
     border-radius: 4px;
     overflow:hidden;
     visibility: visible;
 
+}
+
+#main_menu{
     transform-origin: 100% 0%;
     transform: scale(0, 0);
+    top:78px;
+}
+
+#add_menu{
+    transform-origin: 100% 100%;
+    transform: scale(1, 1);
+    right:10%;
+    bottom:calc(10% + 74px);
 }
 
 .menu .menu_divider{

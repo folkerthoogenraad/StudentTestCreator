@@ -1,6 +1,6 @@
 var menuOpen = false;
 
-const elementId = "menu";
+const elementId = "main_menu";
 const buttonId = "menu_button";
 
 window.addEventListener('resize', () => setMenu(false));
@@ -19,7 +19,6 @@ function setMenu(menu){
     var d = document.getElementById(elementId);
     
     menuOpen = menu;
-    d.style.transformOrigin = "100% 0%";
     d.style.transition = "transform 0.3s ease";
 
     if(menuOpen){
